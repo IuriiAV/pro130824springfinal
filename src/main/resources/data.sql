@@ -1,2 +1,2 @@
--- INSERT INTO network_users(name) values('Max');
+-- INSERT INTO network_users( name) values ('Max');
 SELECT 1;

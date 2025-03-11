@@ -35,17 +35,22 @@
             <version>1.18.34</version>
         </dependency>
 
-        <!--        driver for db mysql connection mysql-->
+        <!--        Драйвер для подключения к БД MySQL-->
         <dependency>
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>9.0.0</version>
         </dependency>
 
-<!--        подключаем spring jdbc в проект-->
+        <!--        Подключаем спринг jdbc в проект-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
         </dependency>
 
     </dependencies>
