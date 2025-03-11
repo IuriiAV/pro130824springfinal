@@ -1,3 +1,6 @@
+DROP TABLE IF EXISTS messages;
+DROP TABLE IF EXISTS network_users;
+
 CREATE TABLE IF NOT EXISTS network_users
 (
     id       BIGINT primary key auto_increment,
