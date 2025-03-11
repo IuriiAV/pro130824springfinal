@@ -1,6 +1,7 @@
 package org.telran.social.repository;
 
 import jakarta.annotation.PostConstruct;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import org.telran.social.model.NetworkUser;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
+@Profile("TEST")
 public class InMemoryNetworkUserRepository implements NetworkUserRepository {
 
     private Map<Long, NetworkUser> storage = new HashMap<>();

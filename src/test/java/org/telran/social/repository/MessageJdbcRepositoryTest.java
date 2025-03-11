@@ -3,6 +3,7 @@ package org.telran.social.repository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.telran.social.emuns.MessageStatus;
 import org.telran.social.model.Message;
 import org.telran.social.model.NetworkUser;
@@ -12,6 +13,8 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Sql("/schemaInit.sql")
+@Sql("/dataInit.sql")
 class MessageJdbcRepositoryTest {
 
     @Autowired
@@ -20,11 +23,13 @@ class MessageJdbcRepositoryTest {
     @Test
     void testGetByUserId() {
         List<Message> messages = messageRepository.getAllByUserId(1l);
+        assertEquals(1,messages.size());
     }
 
     @Test
     void testGetById() {
-        Message byId = messageRepository.getById(1l);
+        Message message = messageRepository.getById(1l);
+        assertEquals(1,message.getSenderId());
     }
 
     @Test
