@@ -6,30 +6,32 @@ import org.telran.social.entity.Post;
 import org.telran.social.repository.PostJpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService {
 
     @Autowired
-    private PostJpaRepository postJpaRepository;
+    private PostJpaRepository repository;
 
     @Override
     public List<Post> getAll() {
-        return null;
+        return repository.findAll();
     }
 
     @Override
     public Post getById(Long id) {
-        return null;
+        Optional<Post> post = repository.findById(id);
+        return post.get();
     }
 
     @Override
     public Post create(Post post) {
-        return null;
+        return repository.save(post);
     }
 
     @Override
     public void deleteById(Long id) {
-
+        repository.deleteById(id);
     }
 }

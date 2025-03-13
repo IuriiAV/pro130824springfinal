@@ -28,6 +28,11 @@ public class Post {
         this.content = content;
     }
 
+    public Post(String content, PostStatus postStatus) {
+        this.content = content;
+        this.postStatus = postStatus;
+    }
+
     public Long getId() {
         return id;
     }
