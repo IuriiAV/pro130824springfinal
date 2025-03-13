@@ -1,4 +1,4 @@
-package org.telran.social.repository;
+package org.telran.social.repository.legacy;
 
 import org.telran.social.model.Message;
 

@@ -1,11 +1,11 @@
-package org.telran.social.repository;
+package org.telran.social.repository.legacy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import org.telran.social.model.NetworkUser;
+import org.telran.social.entity.NetworkUser;
 
 import java.util.List;
 

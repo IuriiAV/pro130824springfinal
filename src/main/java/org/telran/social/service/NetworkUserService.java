@@ -1,6 +1,6 @@
 package org.telran.social.service;
 
-import org.telran.social.model.NetworkUser;
+import org.telran.social.entity.NetworkUser;
 
 import java.util.List;
 
@@ -15,4 +15,6 @@ public interface NetworkUserService {
     void deleteById(Long id);
 
     List<NetworkUser> filter(Long minAge, Long maxAge);
+
+    void generatePost(Long id);
 }

@@ -1,7 +1,6 @@
 package org.telran.social.service;
 
 import org.telran.social.entity.Post;
-import org.telran.social.model.NetworkUser;
 
 import java.util.List;
 

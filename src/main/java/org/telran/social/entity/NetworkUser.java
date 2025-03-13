@@ -1,0 +1,69 @@
+package org.telran.social.entity;
+
+import jakarta.persistence.*;
+import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
+/**
+ * OneToOne - user(user_id,name) -> posts(post_id,content,user_id(unique))
+ * user (1, Alex), posts(1,"Hello",1)
+ *
+ * SELECT user.*, posts.*
+ * FROM user
+ * LEFT JOIN posts
+ * ON posts.user_id = user.user_id
+ *
+ *
+ * OneToMany - user(user_id,name) -> posts(post_id,content,user_id)
+ * user (1, Alex), posts(1,"Hello",1), (2,"Hi",1);
+ *
+ *  SELECT user.*, posts.*
+ *  FROM user
+ *  LEFT JOIN posts
+ *  ON posts.user_id = user.user_id
+ *
+ *  ManyToMany
+ *  customer, shop -> customer(shop1,shop2,shop3)
+ *            -> shop(customer1, customer2, etc)
+ *  table link  -> shop2customer(shop_id, customer_id)
+ *
+ *  1, Max, 1 (save)
+ *
+ *  1, "Hello" (save)
+ *
+ * 1,Max
+ *
+ * 1, "Hi", 1
+ */
+
+@Getter
+@Setter
+@Builder
+@ToString
+@AllArgsConstructor
+@Entity
+@Table(name = "network_users")
+public class NetworkUser {
+
+    @Id // указывает что это поле первичный ключ
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // задает автогенерацию значения поля
+    private Long id;
+
+    private String name;
+
+    private String surname;
+
+    private String login;
+
+    private String password;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "network_user_id")
+    private List<Post> post = new ArrayList<>();
+
+    public NetworkUser() {
+        //
+    }
+}

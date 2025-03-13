@@ -1,9 +1,9 @@
-package org.telran.social.repository;
+package org.telran.social.repository.legacy;
 
 import jakarta.annotation.PostConstruct;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
-import org.telran.social.model.NetworkUser;
+import org.telran.social.entity.NetworkUser;
 
 import java.util.ArrayList;
 import java.util.HashMap;

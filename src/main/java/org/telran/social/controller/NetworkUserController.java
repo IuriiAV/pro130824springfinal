@@ -1,9 +1,10 @@
 package org.telran.social.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.telran.social.dto.NetworkUserResponseDto;
-import org.telran.social.model.NetworkUser;
+import org.telran.social.entity.NetworkUser;
 import org.telran.social.service.NetworkUserService;
 
 import java.util.List;
@@ -65,6 +66,7 @@ public class NetworkUserController {
                         .name(user.getName())
                         .id(user.getId())
                         .surname(user.getSurname())
+                        .posts(user.getPost())
                         .build())
                 .collect(Collectors.toList());
     }
@@ -78,7 +80,10 @@ public class NetworkUserController {
 
     //POST http://localhost:8080/api/users
     //2. Передача параметра в метод в теле запроса @RequestBody
+
+    //Всегда, когда что-то создаем в системе, если все хорошо, то возвращаем 201 код
     @PostMapping // - POST запрос
+    @ResponseStatus(HttpStatus.CREATED)
     public NetworkUser create(@RequestBody NetworkUser networkUser) {
         return userService.create(networkUser);
     }
@@ -95,5 +100,10 @@ public class NetworkUserController {
     @DeleteMapping("/{id}")
     public void deleteById(@PathVariable(name = "id") Long id) {
         userService.deleteById(id);
+    }
+
+    @PostMapping("/generate")
+    public void generatePostForUser(){
+        userService.generatePost(6L);
     }
 }

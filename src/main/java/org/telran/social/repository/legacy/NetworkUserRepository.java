@@ -1,6 +1,6 @@
-package org.telran.social.repository;
+package org.telran.social.repository.legacy;
 
-import org.telran.social.model.NetworkUser;
+import org.telran.social.entity.NetworkUser;
 
 import java.util.List;
 

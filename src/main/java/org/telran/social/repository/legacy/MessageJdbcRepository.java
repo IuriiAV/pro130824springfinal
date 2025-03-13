@@ -1,4 +1,4 @@
-package org.telran.social.repository;
+package org.telran.social.repository.legacy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -6,9 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.telran.social.model.Message;
 
-import java.security.SecureRandom;
 import java.util.List;
-import java.util.Map;
 
 @Repository
 public class MessageJdbcRepository implements MessageRepository {

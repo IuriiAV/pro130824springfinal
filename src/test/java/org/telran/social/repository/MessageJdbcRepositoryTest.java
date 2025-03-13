@@ -6,7 +6,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.telran.social.emuns.MessageStatus;
 import org.telran.social.model.Message;
-import org.telran.social.model.NetworkUser;
+import org.telran.social.repository.legacy.MessageRepository;
 
 import java.util.List;
 
