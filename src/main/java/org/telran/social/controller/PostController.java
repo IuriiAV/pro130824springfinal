@@ -23,8 +23,12 @@ public class PostController {
     }
 
     @GetMapping("/{id}")
-    public Post getByI(@PathVariable Long id) {
+    public Post getById(@PathVariable Long id) {
         return postService.getById(id);
     }
 
+    @GetMapping("/user/{id}") // localhost:8080/api/posts/user/123
+    public List<Post> getAllByUserId(@PathVariable Long id) {
+        return postService.getAllByUserId(id);
+    }
 }

@@ -66,7 +66,7 @@ public class NetworkUserController {
                         .name(user.getName())
                         .id(user.getId())
                         .surname(user.getSurname())
-                        .posts(user.getPost())
+                        //.posts(user.getPost())
                         .build())
                 .collect(Collectors.toList());
     }

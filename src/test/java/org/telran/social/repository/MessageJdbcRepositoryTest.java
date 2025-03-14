@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.telran.social.emuns.MessageStatus;
-import org.telran.social.model.Message;
+import org.telran.social.entity.Message;
 import org.telran.social.repository.legacy.MessageRepository;
 
 import java.util.List;

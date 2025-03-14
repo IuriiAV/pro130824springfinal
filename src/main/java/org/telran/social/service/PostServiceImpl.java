@@ -1,5 +1,7 @@
 package org.telran.social.service;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telran.social.entity.Post;
@@ -33,5 +35,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public void deleteById(Long id) {
         repository.deleteById(id);
+    }
+
+    @Override
+    public List<Post> getAllByUserId(Long id) {
+        return repository.findAllByUserId(id);
     }
 }

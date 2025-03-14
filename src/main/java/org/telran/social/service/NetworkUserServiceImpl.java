@@ -18,7 +18,8 @@ public class NetworkUserServiceImpl implements NetworkUserService {
 
     @Override
     public List<NetworkUser> getAll() {
-        return userRepository.findAll();
+        List<NetworkUser> users = userRepository.findAll();
+        return users;
     }
 
     @Override
@@ -53,4 +54,4 @@ public class NetworkUserServiceImpl implements NetworkUserService {
     //user -> account
     //transaction -> accountFrom, accountTo(accountService.save(accountFrom),accountService.save(accountTo) )
 }   // user - > accountList
-    //create account , accountList.add(account).save
+//create account , accountList.add(account).save

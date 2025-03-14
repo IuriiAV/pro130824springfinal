@@ -19,6 +19,9 @@ public class Post {
     @Enumerated(EnumType.STRING) // храним енам в бд как строку
     private PostStatus postStatus; // post_status
 
+    @ManyToOne
+    private NetworkUser user;
+
     public Post() {
         //
     }

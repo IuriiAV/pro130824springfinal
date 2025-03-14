@@ -1,6 +1,6 @@
 package org.telran.social.repository.legacy;
 
-import org.telran.social.model.Message;
+import org.telran.social.entity.Message;
 
 import java.util.List;
 
