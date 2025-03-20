@@ -36,6 +36,12 @@ public class Post {
         this.postStatus = postStatus;
     }
 
+    public Post(String content, PostStatus postStatus, NetworkUser user) {
+        this.content = content;
+        this.postStatus = postStatus;
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }

@@ -1,10 +1,10 @@
 package org.telran.social.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.telran.social.dto.PostCreateRequestDto;
+import org.telran.social.emuns.PostStatus;
 import org.telran.social.entity.Post;
 import org.telran.social.service.PostService;
 
@@ -30,5 +30,11 @@ public class PostController {
     @GetMapping("/user/{id}") // localhost:8080/api/posts/user/123
     public List<Post> getAllByUserId(@PathVariable Long id) {
         return postService.getAllByUserId(id);
+    }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Post createPost(@RequestBody PostCreateRequestDto postDto) {
+        return postService.createFromDto(postDto);
     }
 }

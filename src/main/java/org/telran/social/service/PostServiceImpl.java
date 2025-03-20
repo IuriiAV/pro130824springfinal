@@ -4,6 +4,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.telran.social.dto.PostCreateRequestDto;
+import org.telran.social.emuns.PostStatus;
+import org.telran.social.entity.NetworkUser;
 import org.telran.social.entity.Post;
 import org.telran.social.repository.PostJpaRepository;
 
@@ -15,6 +18,9 @@ public class PostServiceImpl implements PostService {
 
     @Autowired
     private PostJpaRepository repository;
+
+    @Autowired
+    private NetworkUserService userService;
 
     @Override
     public List<Post> getAll() {
@@ -40,5 +46,14 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<Post> getAllByUserId(Long id) {
         return repository.findAllByUserId(id);
+    }
+
+    @Override
+    public Post createFromDto(PostCreateRequestDto postDto) {
+        NetworkUser userEntity = userService.getById(postDto.userId());
+        Post post = new Post(postDto.content(),
+                PostStatus.getValue(postDto.postStatus()),
+                userEntity);
+        return repository.save(post);
     }
 }

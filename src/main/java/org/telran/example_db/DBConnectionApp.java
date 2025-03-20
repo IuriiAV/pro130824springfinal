@@ -26,6 +26,7 @@ public class DBConnectionApp {
         Connection connection = null;
         String connectionString = "jdbc:mysql://" + host + ":" + port + "/" + dbName;
 
+        //ACID -
         try {
             //String driver = "driver name";
             //Class.forName(driver);

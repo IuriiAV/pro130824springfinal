@@ -2,5 +2,14 @@ package org.telran.social.emuns;
 
 public enum PostStatus {
     DRAFT,
-    PUBLISHED
+    PUBLISHED;
+
+    public static PostStatus getValue(String value) {
+        for (PostStatus status : values()) {
+            if(status.name().equals(value)) {
+                return status;
+            }
+        }
+        return DRAFT;
+    }
 }

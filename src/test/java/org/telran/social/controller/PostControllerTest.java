@@ -2,6 +2,7 @@ package org.telran.social.controller;
 
 import io.restassured.RestAssured;
 import io.restassured.common.mapper.TypeRef;
+import io.restassured.http.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,6 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql("/postInit.sql")
+@Sql("/schemaInit.sql")
+@Sql("/dataInit.sql")
 class PostControllerTest {
 
     @LocalServerPort
@@ -44,8 +47,29 @@ class PostControllerTest {
                 .statusCode(200)
                 .extract()
                 .response()
-                .as(new TypeRef<Post>() {});
+                .as(new TypeRef<Post>() {
+                });
         assertEquals("Hello", post.getContent());
+    }
+
+    @Test
+    void testCreatePost() {
+        String request = "{\n" +
+                "  \"content\": \"HelloPost\",\n" +
+                "  \"postStatus\": \"DRAFT\",\n" +
+                "  \"userId\" : 2\n" +
+                "}";
+        Post post = given()
+                .port(port)
+                .contentType(ContentType.JSON)
+                .body(request)
+                .when()
+                .post("/api/posts")
+                .then()
+                .statusCode(201)
+                .extract()
+                .as(Post.class);
+        assertEquals("HelloPost",post.getContent());
 
 
     }
