@@ -7,6 +7,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.telran.social.emuns.MessageStatus;
 import org.telran.social.entity.Message;
 import org.telran.social.repository.legacy.MessageRepository;
+import org.telran.social.repository.legacy.NetworkUserRepository;
 
 import java.util.List;
 
@@ -20,22 +21,26 @@ class MessageJdbcRepositoryTest {
     @Autowired
     private MessageRepository messageRepository;
 
+    @Autowired
+    private NetworkUserRepository networkUserRepository;
+
     @Test
     void testGetByUserId() {
         List<Message> messages = messageRepository.getAllByUserId(1l);
-        assertEquals(1,messages.size());
+        assertEquals(1, messages.size());
     }
 
     @Test
     void testGetById() {
         Message message = messageRepository.getById(1l);
-        assertEquals(1,message.getSenderId());
+        assertEquals(1, message.getSenderId());
     }
 
     @Test
     void testCreate() {
         List<Message> messagesBefore = messageRepository.getAllByUserId(1l);
-        Message message = new Message(null, "test last", 1l, 2l, MessageStatus.SENT);
+        Message message = new Message(null, "test last", 1l, 2l, MessageStatus.SENT
+                , networkUserRepository.getById(1l), networkUserRepository.getById(2l));
         Long lastMessageId = messagesBefore.get(messagesBefore.size() - 1).getId();
 
         Long createdMessageId = messageRepository.create(message).getId();

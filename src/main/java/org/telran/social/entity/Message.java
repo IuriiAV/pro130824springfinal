@@ -27,6 +27,7 @@ public class Message {
     @Column(name = "r_id")
     private Long receiverId;
 
+    @Enumerated(EnumType.STRING)
     private MessageStatus status;
 
     @ManyToOne
@@ -34,8 +35,6 @@ public class Message {
 
     @ManyToOne
     private NetworkUser receiver; //receiver_id
-
-
 
     public Message() {
         //
