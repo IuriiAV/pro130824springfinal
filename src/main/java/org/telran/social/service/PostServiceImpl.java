@@ -2,18 +2,21 @@ package org.telran.social.service;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Query;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.telran.social.dto.PostCreateRequestDto;
 import org.telran.social.emuns.PostStatus;
 import org.telran.social.entity.NetworkUser;
 import org.telran.social.entity.Post;
+import org.telran.social.exception.PostNotFoundException;
 import org.telran.social.repository.PostJpaRepository;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Slf4j
 public class PostServiceImpl implements PostService {
 
     @Autowired
@@ -30,6 +33,10 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post getById(Long id) {
         Optional<Post> post = repository.findById(id);
+        if (!post.isPresent()) {
+            log.error("post with id {} not found ", id);
+            throw new PostNotFoundException("post with id "+ id +" not found ");
+        }
         return post.get();
     }
 

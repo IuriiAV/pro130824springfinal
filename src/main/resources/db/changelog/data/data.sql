@@ -1,0 +1,1 @@
+INSERT INTO network_user(name) values ('Max');

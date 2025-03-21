@@ -3,6 +3,7 @@ package org.telran.social.service;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.jdbc.SqlGroup;
@@ -23,7 +24,6 @@ class PostServiceImplTest {
 
     @BeforeEach
     private void init() {
-        repository.
         repository.save(new Post(1L,"Hello"));
     }
 

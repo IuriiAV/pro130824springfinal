@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import org.telran.social.dto.PostCreateRequestDto;
 import org.telran.social.emuns.PostStatus;
 import org.telran.social.entity.Post;
+import org.telran.social.exception.PostNotFoundException;
 import org.telran.social.service.PostService;
 
 import java.util.List;
@@ -36,5 +37,11 @@ public class PostController {
     @ResponseStatus(HttpStatus.CREATED)
     public Post createPost(@RequestBody PostCreateRequestDto postDto) {
         return postService.createFromDto(postDto);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(PostNotFoundException.class)
+    public String handleException(PostNotFoundException exception) {
+        return exception.getMessage();
     }
 }

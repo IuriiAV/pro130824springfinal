@@ -1,5 +1,8 @@
 package org.telran.social.controller;
 
+import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -55,13 +58,14 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/users")
 public class NetworkUserController {
 
+    private static final Logger log = LoggerFactory.getLogger(NetworkUserController.class);
+
     @Autowired
     private NetworkUserService userService;
 
     // GET http://localhost:8080/api/users
     @GetMapping // - GET запрос
     public List<NetworkUserResponseDto> getAll() {
-
         return userService.getAll().stream().map(user -> NetworkUserResponseDto.builder()
                         .name(user.getName())
                         .id(user.getId())

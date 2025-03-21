@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <!-- new + liquibase - > ok  any clear database will create ok  -->
+    <!-- exists database + liquibase(only for new tables) - > ok  any clear database does not work  -->
+    <changeSet id="1-create table-network-user" author="admin">
+        <createTable tableName="network_user">
+            <column name="id" type="BiGINT" autoIncrement="true">
+                <constraints primaryKey="true" primaryKeyName="network_user_pkey"  nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(255)"/>
+            <column name="surname" type="VARCHAR(255)"/>
+            <column name="login" type="VARCHAR(255)"/>
+            <column name="password" type="VARCHAR(255)"/>
+            <column name="remarks" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2-add column email" author="admin">
+       <addColumn tableName="network_user">
+           <column name="email" type="VARCHAR(255)"/>
+       </addColumn>
+    </changeSet>
+
+    <changeSet id="3-create table post" author="admin">
+        <sql>
+            CREATE TABLE posts
+            (
+                id          BIGINT primary key auto_increment,
+                content     VARCHAR(255),
+                post_status VARCHAR(255),
+                user_id     BIGINT
+            );
+        </sql>
+    </changeSet>
+
+    <changeSet id="4-add fk for users and posts" author="admin">
+        <addForeignKeyConstraint baseTableName="posts" baseColumnNames="user_id"
+                                 constraintName="user_id_fkey"
+                                 referencedTableName="network_user"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+</databaseChangeLog>

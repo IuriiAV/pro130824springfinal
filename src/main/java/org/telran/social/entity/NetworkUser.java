@@ -46,7 +46,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @Entity
-@Table(name = "network_users")
+@Table(name = "network_user")
 public class NetworkUser {
 
     @Id // указывает что это поле первичный ключ
