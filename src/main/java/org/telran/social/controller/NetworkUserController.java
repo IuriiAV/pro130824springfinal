@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.telran.social.dto.NetworkUserResponseDto;
 import org.telran.social.entity.NetworkUser;
+import org.telran.social.service.Converter;
 import org.telran.social.service.NetworkUserService;
 
 import java.util.List;
@@ -61,17 +62,17 @@ public class NetworkUserController {
     private static final Logger log = LoggerFactory.getLogger(NetworkUserController.class);
 
     @Autowired
+    private Converter<NetworkUserResponseDto, NetworkUser> converter;
+
+    @Autowired
     private NetworkUserService userService;
 
     // GET http://localhost:8080/api/users
     @GetMapping // - GET запрос
     public List<NetworkUserResponseDto> getAll() {
-        return userService.getAll().stream().map(user -> NetworkUserResponseDto.builder()
-                        .name(user.getName())
-                        .id(user.getId())
-                        .surname(user.getSurname())
-                        //.posts(user.getPost())
-                        .build())
+        return userService.getAll()
+                .stream()
+                .map(user -> converter.toDto(user))
                 .collect(Collectors.toList());
     }
 
@@ -107,7 +108,7 @@ public class NetworkUserController {
     }
 
     @PostMapping("/generate")
-    public void generatePostForUser(){
+    public void generatePostForUser() {
         userService.generatePost(6L);
     }
 }
