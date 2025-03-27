@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface MessageJpaRepository extends JpaRepository<Message, Long> {
 
-    @Query("SELECT m FROM Message AS m WHERE m.sender.id = :id or m.receiver.id = :id")
+    @Query("SELECT m FROM Message AS m WHERE m.sender.id = :id")
     List<Message> findAllByUserId(@Param("id") Long id);
 }

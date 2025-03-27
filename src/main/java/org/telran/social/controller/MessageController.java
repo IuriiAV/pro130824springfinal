@@ -1,5 +1,6 @@
 package org.telran.social.controller;
 
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,6 +9,7 @@ import org.telran.social.dto.MessageDto;
 import org.telran.social.service.MessageService;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/messages")
@@ -28,8 +30,19 @@ public class MessageController {
     }
 
     @GetMapping("/user/{id}")
-    public List<MessageDto> getAllByUserId(@PathVariable Long id) {
-        return service.findAllByUserId(id);
+    public ResponseEntity<Map<String, Object>> getAllByUserId(@PathVariable Long id) {
+        List<MessageDto> messages = service.findAllByUserId(id);
+
+        if (messages.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
+
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(Map.of(
+                        "status", HttpStatus.OK.value(),
+                        "data", messages
+                ));
+
     }
 
     @PostMapping
@@ -39,6 +52,7 @@ public class MessageController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @ResponseStatus(HttpStatus.OK)
     public void delete(@PathVariable Long id) {
         service.deleteMessageById(id);
     }

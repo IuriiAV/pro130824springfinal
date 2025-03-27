@@ -6,20 +6,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-import org.springframework.context.annotation.Bean;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.jdbc.Sql;
-import org.telran.social.dto.MessageDto;
-import org.telran.social.entity.Message;
 import org.telran.social.service.NetworkUserService;
-
-import java.util.List;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @Sql("/dataInit.sql")
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 class MessageControllerTest {
 
     @LocalServerPort
@@ -69,10 +65,16 @@ class MessageControllerTest {
                 .post("api/messages")
                 .then()
                 .statusCode(201);
-
     }
 
     @Test
     void delete() {
+        given()
+                .port(port)
+                .pathParam("id",1)
+                .when()
+                .delete("/api/messages/delete/{id}")
+                .then()
+                .statusCode(200);
     }
 }

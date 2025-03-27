@@ -1,5 +1,6 @@
 package org.telran.social.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.Modifying;
@@ -10,6 +11,7 @@ import org.telran.social.repository.MessageJpaRepository;
 import org.telran.social.repository.NetworkUserJpaRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MessageServiceImpl implements MessageService {
@@ -53,6 +55,10 @@ public class MessageServiceImpl implements MessageService {
     @Modifying
     @Transactional
     public void deleteMessageById(Long id) {
+        Optional<Message> byId = repository.findById(id);
+        if (byId.isEmpty()) {
+            throw new EntityNotFoundException();
+        }
         repository.deleteById(id);
     }
 }
