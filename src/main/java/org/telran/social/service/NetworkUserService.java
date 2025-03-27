@@ -17,4 +17,6 @@ public interface NetworkUserService {
     List<NetworkUser> filter(Long minAge, Long maxAge);
 
     void generatePost(Long id);
+
+    NetworkUser findByLogin(String login);
 }
