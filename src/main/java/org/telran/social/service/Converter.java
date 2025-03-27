@@ -1,10 +1,8 @@
 package org.telran.social.service;
 
-public interface Converter<Dto, Entity> {
+public interface Converter<RequestDto, ResponseDto, Entity> {
 
-    Dto toDto(Entity entity);
+    ResponseDto toDto(Entity entity);
 
-    Entity toEntity(Dto dto);
-
-    //Entity createEntity(CreateDto dto);
+    Entity toEntity(RequestDto dto);
 }

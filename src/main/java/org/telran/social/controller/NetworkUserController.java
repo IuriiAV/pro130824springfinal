@@ -5,7 +5,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.telran.social.dto.NetworkUserRequestDto;
 import org.telran.social.dto.NetworkUserResponseDto;
 import org.telran.social.entity.NetworkUser;
 import org.telran.social.service.Converter;
@@ -62,10 +64,13 @@ public class NetworkUserController {
     private static final Logger log = LoggerFactory.getLogger(NetworkUserController.class);
 
     @Autowired
-    private Converter<NetworkUserResponseDto, NetworkUser> converter;
+    private Converter<NetworkUserRequestDto, NetworkUserResponseDto, NetworkUser> converter;
 
     @Autowired
     private NetworkUserService userService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // GET http://localhost:8080/api/users
     @GetMapping // - GET запрос
@@ -89,8 +94,11 @@ public class NetworkUserController {
     //Всегда, когда что-то создаем в системе, если все хорошо, то возвращаем 201 код
     @PostMapping // - POST запрос
     @ResponseStatus(HttpStatus.CREATED)
-    public NetworkUser create(@RequestBody NetworkUser networkUser) {
-        return userService.create(networkUser);
+    public NetworkUserResponseDto create(@RequestBody NetworkUserRequestDto requestDto) {
+        String encoded = passwordEncoder.encode(requestDto.getPassword());
+        requestDto.setPassword(encoded);
+        NetworkUser networkUser = userService.create(converter.toEntity(requestDto));
+        return converter.toDto(networkUser);
     }
 
     //GET http://localhost:8080/api/users/filter?minAge=18&maxAge=35

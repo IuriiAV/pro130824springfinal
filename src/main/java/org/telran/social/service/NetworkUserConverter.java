@@ -1,11 +1,14 @@
 package org.telran.social.service;
 
 import org.springframework.stereotype.Component;
+import org.telran.social.dto.NetworkUserRequestDto;
 import org.telran.social.dto.NetworkUserResponseDto;
 import org.telran.social.entity.NetworkUser;
 
 @Component
-public class NetworkUserConverter implements Converter<NetworkUserResponseDto, NetworkUser> {
+public class NetworkUserConverter implements
+        Converter<NetworkUserRequestDto,
+                NetworkUserResponseDto, NetworkUser> {
 
     @Override
     public NetworkUserResponseDto toDto(NetworkUser user) {
@@ -13,12 +16,16 @@ public class NetworkUserConverter implements Converter<NetworkUserResponseDto, N
                 .name(user.getName())
                 .id(user.getId())
                 .surname(user.getSurname())
-                //.posts(user.getPost())
                 .build();
     }
 
     @Override
-    public NetworkUser toEntity(NetworkUserResponseDto networkUserResponseDto) {
-        return null;
+    public NetworkUser toEntity(NetworkUserRequestDto requestDto) {
+        return NetworkUser.builder()
+                .name(requestDto.getName())
+                .surname(requestDto.getSurname())
+                .login(requestDto.getLogin())
+                .password(requestDto.getPassword())
+                .build();
     }
 }
