@@ -43,4 +43,10 @@
                                  referencedTableName="network_user"
                                  referencedColumnNames="id"/>
     </changeSet>
+
+    <changeSet id="5-add column role to network_users" author="admin">
+        <addColumn tableName="network_user">
+            <column name="role" type="VARCHAR(16)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>

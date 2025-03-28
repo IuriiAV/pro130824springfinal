@@ -52,7 +52,8 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public List<Post> getAllByUserId(Long id) {
-        return repository.findAllByUserId(id);
+        NetworkUser currentUser = userService.getCurrentUser();
+        return repository.findAllByUserId(currentUser.getId());
     }
 
     @Override

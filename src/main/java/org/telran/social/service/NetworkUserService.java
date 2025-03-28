@@ -19,4 +19,6 @@ public interface NetworkUserService {
     void generatePost(Long id);
 
     NetworkUser findByLogin(String login);
+
+    NetworkUser getCurrentUser();
 }

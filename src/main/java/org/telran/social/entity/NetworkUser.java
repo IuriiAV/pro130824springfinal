@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.telran.social.emuns.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +62,9 @@ public class NetworkUser {
     private String login;
 
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.ROLE_USER;
 
     //EAGER - все выбирается сразу (default)
     //LAZY - все выбирается при запросе к данным
