@@ -3,6 +3,7 @@ package org.telran.social.service;
 import org.springframework.stereotype.Component;
 import org.telran.social.dto.NetworkUserRequestDto;
 import org.telran.social.dto.NetworkUserResponseDto;
+import org.telran.social.emuns.Role;
 import org.telran.social.entity.NetworkUser;
 
 @Component
@@ -25,6 +26,7 @@ public class NetworkUserConverter implements
                 .name(requestDto.getName())
                 .surname(requestDto.getSurname())
                 .login(requestDto.getLogin())
+                .role(Role.ROLE_USER)
                 .password(requestDto.getPassword())
                 .build();
     }

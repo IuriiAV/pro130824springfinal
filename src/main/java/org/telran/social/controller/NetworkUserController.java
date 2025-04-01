@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.*;
 import org.telran.social.dto.NetworkUserRequestDto;
 import org.telran.social.dto.NetworkUserResponseDto;
 import org.telran.social.entity.NetworkUser;
+import org.telran.social.security.AuthenticationService;
+import org.telran.social.security.model.SignInRequest;
+import org.telran.social.security.model.SignInResponse;
 import org.telran.social.service.Converter;
 import org.telran.social.service.NetworkUserService;
 
@@ -72,6 +75,9 @@ public class NetworkUserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private AuthenticationService authenticationService;
+
     // GET http://localhost:8080/api/users
     @GetMapping // - GET запрос
     public List<NetworkUserResponseDto> getAll() {
@@ -99,6 +105,11 @@ public class NetworkUserController {
         requestDto.setPassword(encoded);
         NetworkUser networkUser = userService.create(converter.toEntity(requestDto));
         return converter.toDto(networkUser);
+    }
+
+    @PostMapping("/login")
+    public SignInResponse login(@RequestBody SignInRequest request) {
+        return authenticationService.authenticate(request);
     }
 
     //GET http://localhost:8080/api/users/filter?minAge=18&maxAge=35
