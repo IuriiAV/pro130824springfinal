@@ -1,5 +1,6 @@
 package org.telran.social.security;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -47,7 +48,22 @@ public class JwtService {
         return token;
     }
 
-//    private SecretKey getSecretKey() {
-//        return Keys.hmacShaKeyFor(Decoders.BASE64.decode(jjwtSingKey));
-//    }
+    public String extractUserName(String token) {
+        Claims claims = extractAllClaims(token);
+        return claims.getSubject();
+    }
+
+    public boolean isTokenValid(String token) {
+        Claims claims = extractAllClaims(token);
+        Date expiration = claims.getExpiration();
+        return expiration.after(new Date());
+    }
+
+    private Claims extractAllClaims(String token) {
+        return Jwts.parser()
+                .setSigningKey(secretKey)
+                .build()
+                .parseSignedClaims(token)
+                .getPayload();
+    }
 }
