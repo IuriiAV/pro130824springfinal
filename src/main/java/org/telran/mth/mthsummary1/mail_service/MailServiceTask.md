@@ -13,7 +13,7 @@ CheckEmail :
 2) Send notification -> log
 
 Map<email, user>
-
+ 
 file on disk 
  email -> text
  email -> text
