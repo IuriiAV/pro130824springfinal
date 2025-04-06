@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -18,4 +19,10 @@ public class User {
     private String name;
 
     private List<Email> emailList;
+
+    public User(String email, String name) {
+        this.email = email;
+        this.name = name;
+        this.emailList = new ArrayList<>();
+    }
 }
