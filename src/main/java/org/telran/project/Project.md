@@ -22,3 +22,23 @@ Entities :
 6) Exception, handler
 
 
+Part 2 :
+1) Controllers (use REST API document)
+2) Order, Cart, CartItem
+3) Filter products
+4) Relationship
+5) DTO
+6) MapStruct(lombok, mapstruct, lombok mapstruct binding, plugin - mapstruct)
+
+User -> fav1 (id, user_id, product_id)
+     -> fav2 (id, user_id, product_id)
+     -> fav3 (id, user_id, product_id)
+
+
+
+
+//Order
+CREATED, Payment controller -> PAYED -> (5 min) -> COMPLETED
+CREATED -> (10 min) -> CANCELLED
+
+
