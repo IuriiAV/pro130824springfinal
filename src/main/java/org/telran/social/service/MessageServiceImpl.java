@@ -1,24 +1,25 @@
 package org.telran.social.service;
 
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.telran.social.dto.MessageDto;
 import org.telran.social.emuns.MessageStatus;
 import org.telran.social.entity.Message;
 import org.telran.social.entity.NetworkUser;
 import org.telran.social.repository.MessageJpaRepository;
-import org.telran.social.repository.legacy.MessageRepository;
 
 @Service
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
 public class MessageServiceImpl implements MessageService {
 
     private final NetworkUserService userService;
 
     private final MessageJpaRepository repository;
+
+    public MessageServiceImpl(NetworkUserService userService, MessageJpaRepository repository) {
+        this.userService = userService;
+        this.repository = repository;
+    }
 
 //    private final MessageService messageService;
 

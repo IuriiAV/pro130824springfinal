@@ -31,10 +31,10 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable) // отключаем csrf
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers(HttpMethod.GET, "api/messages").permitAll()
-                        .requestMatchers(HttpMethod.POST, "api/users").permitAll()
-                        .requestMatchers(HttpMethod.POST, "api/users/login").permitAll()
-                        .anyRequest().authenticated() //
+                        //.requestMatchers(HttpMethod.GET, "api/messages").permitAll()
+                       // .requestMatchers(HttpMethod.POST, "api/users").permitAll()
+                       // .requestMatchers(HttpMethod.POST, "api/users/login").permitAll()
+                        .anyRequest().permitAll()//
                 )
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session ->

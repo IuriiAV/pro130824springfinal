@@ -1,8 +1,10 @@
 package org.telran.mth.mthlesson1.summ;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class SumApp {
 
-    public static int result = 0;
+    public static AtomicInteger result = new AtomicInteger(0);
 
     public static void main(String[] args) throws InterruptedException {
         Sum sum = new Sum();
@@ -19,6 +21,6 @@ public class SumApp {
         thread1.join();
         thread2.join();
 
-        System.out.println("Result = " + result);
+        System.out.println("Result = " + result.get());
     }
 }
