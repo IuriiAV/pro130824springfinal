@@ -32,12 +32,15 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public Post getById(Long id) {
-        Optional<Post> post = repository.findById(id);
-        if (!post.isPresent()) {
-            log.error("post with id {} not found ", id);
-            throw new PostNotFoundException("post with id "+ id +" not found ");
-        }
-        return post.get();
+        return repository.findById(id)
+                .orElseThrow(() -> new PostNotFoundException("Post with id " + id + " not found"));
+
+//        Optional<Post> post = repository.findById(id);
+//        if (!post.isPresent()) {
+//            log.error("post with id {} not found ", id);
+//            throw new PostNotFoundException("post with id "+ id +" not found ");
+//        }
+//        return post.get();
     }
 
     @Override
